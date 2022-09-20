@@ -5,36 +5,73 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Challenge - DOM</title>
+    <link rel="stylesheet" href="style.css" />
   </head>
   <body>
     <div id="app">
       <!-- TODO: Buatlah sebuah header dengan id todo-title -->
+      <div id="todo-title">
+        <h3>To-Do-List</h3>
+      </div>
       <!-- TODO: Buatlah sebuah subtitle dengan id todo-subtitle -->
-
+      <div id="todo-subtitle">
+        <h4>~Today I need to~</h4>
+      </div>
       <!-- Section: input -->
+      <section id="input">
       <!-- TODO: Buatlah sebuah input bertipe text dengan id todo-input -->
+        <input type="text" id="todo-input" placeholder="Masukkan kegiatan"/>
       <!-- TODO: Buatlah sebuah button dengan id todo-submit -->
-
+      <button id="todo-submit">Input</button>
+      </section>
       <!-- Section output -->
+      <section id="output">
       <!-- TODO: Buatlah sebuah <ul> dengan id todo-output -->
+        <ul id="todo-output">
+        </ul>
+      </section>
     </div>
 
     <!-- ! Untuk tantangan ini, script jangan diubah ke external js yah ! -->
     <script>
       // TODO: Deklarasi variable sesuai dengan kebutuhan di sini
-      let button;
-      let input;
+      let button = document.querySelector('#todo-submit'); 
+      let input = document.querySelector('#todo-input');
       let output;
+      const ul = document.querySelector('#todo-output');
+
+      function createListItem(item) {
+      let li = document.createElement('li');
+      li.textContent = item;
+      li.className = 'favorite-item';
+      return li;
+    }
 
       // TODO: Buatlah sebuah fungsi dengan nama fnClickHandler
       // Fungsi yang digunakan untuk menambahkan tulisan
       // Jangan ubah cara deklarasi fungsinya, cukup isi saja
-      function fnClickHandler(toDoItem) {}
-
+      function fnClickHandler(toDoItem) {
+        const newFav = [];
+        newFav.push(toDoItem)
+      const nodes = newFav.map((item) => {
+      return ul.append(createListItem(item));
+    });
+      // ul.append(...nodes);
+      }
+      
       // TODO: register event onclick / addEventListener untuk button
       // akan menjalankan fungsi fnClickHandler
-      
+      button.addEventListener('click', () => {
+      const isi = input.value;
+        fnClickHandler(isi)
+    });
       // TODO: register event onkeypress / addEventListener untuk input
+       input.addEventListener('keyup', (event) => {
+      if (event.key === 'Enter') {
+        const isi = input.value;
+        fnClickHandler(isi)
+      }
+    });
       // sehingga saat di input ditekan enter akan menjalankan fungsi fnClickHandler juga
     </script>
   </body>
